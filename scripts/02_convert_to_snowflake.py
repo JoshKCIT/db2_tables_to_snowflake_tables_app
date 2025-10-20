@@ -475,7 +475,7 @@ def main():
         
         # Create test content with various DB2 features
         test_content = """-- Source file: data/input/sample.sql
--- Extracted: 2024-01-01T00:00:00Z
+-- Extracted: 2025-10-20T00:00:00Z
 
 CREATE TABLE APP.ACCOUNT (
   ACCOUNT_ID INTEGER NOT NULL CONSTRAINT PK_ACC PRIMARY KEY,

@@ -176,7 +176,7 @@ CREATE TABLE APP.ACCOUNT (
 
 ```sql
 -- Source file: data/input/sample.sql
--- Extracted: 2024-01-01T00:00:00Z
+-- Extracted: 2025-10-20T00:00:00Z
 
 CREATE TABLE APP.ACCOUNT (
   ACCOUNT_ID INTEGER NOT NULL,

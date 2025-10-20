@@ -1,5 +1,5 @@
 -- Source file: examples/sample_db2_ddl.sql
--- Extracted: 2024-01-01T00:00:00Z
+-- Extracted: 2025-10-20T00:00:00Z
 
 CREATE TABLE APP.USER_PROFILE (
   USER_ID INTEGER NOT NULL,
