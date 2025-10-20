@@ -32,7 +32,7 @@ This is the initial release of the DB2 to Snowflake Table Converter, a powerful 
 ### 📁 Project Structure
 
 ```
-db2-to-snowflake-converter/
+db2_tables_to_snowflake_tables_app/
 ├── scripts/                    # Core conversion scripts
 ├── examples/                   # Sample files and expected outputs
 ├── data/                      # Input/output directories
@@ -45,8 +45,8 @@ db2-to-snowflake-converter/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/JoshKCIT/db2-to-snowflake-converter.git
-   cd db2-to-snowflake-converter
+   git clone https://github.com/JoshKCIT/db2_tables_to_snowflake_tables_app.git
+   cd db2_tables_to_snowflake_tables_app
    ```
 
 2. **Place your DB2 DDL files** in `data/input/`

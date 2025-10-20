@@ -42,8 +42,8 @@ Thank you for your interest in contributing to this project! This document provi
 
 1. **Clone your fork**:
    ```bash
-   git clone https://github.com/JoshKCIT/db2-to-snowflake-converter.git
-   cd db2-to-snowflake-converter
+   git clone https://github.com/JoshKCIT/db2_tables_to_snowflake_tables_app.git
+   cd db2_tables_to_snowflake_tables_app
    ```
 
 2. **Create a virtual environment** (recommended):
@@ -139,7 +139,7 @@ Include in your pull request:
 ## 🏗 Project Structure
 
 ```
-db2-to-snowflake-converter/
+db2_tables_to_snowflake_tables_app/
 ├── scripts/                    # Main conversion scripts
 │   ├── 01_split_db2_ddl.py    # DDL splitting logic
 │   └── 02_convert_to_snowflake.py  # Conversion logic

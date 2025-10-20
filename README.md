@@ -35,8 +35,8 @@ A powerful Python tool that automatically converts DB2 CREATE TABLE statements t
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/JoshKCIT/db2-to-snowflake-converter.git
-cd db2-to-snowflake-converter
+git clone https://github.com/JoshKCIT/db2_tables_to_snowflake_tables_app.git
+cd db2_tables_to_snowflake_tables_app
 ```
 
 2. No installation required - the tool runs directly from the repository!
@@ -138,7 +138,7 @@ python scripts/02_convert_to_snowflake.py --selftest
 ## 📁 File Structure
 
 ```
-db2-to-snowflake-converter/
+db2_tables_to_snowflake_tables_app/
 ├── data/
 │   ├── input/                          # Place your DB2 DDL files here
 │   └── output/
@@ -216,7 +216,7 @@ APP.ACCOUNT | CODE | ambiguous default removed | WITH DEFAULT
 
 ### Getting Help
 
-- Check the [Issues](https://github.com/JoshKCIT/db2-to-snowflake-converter/issues) page
+- Check the [Issues](https://github.com/JoshKCIT/db2_tables_to_snowflake_tables_app/issues) page
 - Review the examples in the `examples/` directory
 - Run the self-test mode to verify installation
 
