@@ -1,0 +1,140 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9, '3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Verify Python installation
+      run: |
+        python --version
+        python -c "import sys; print(f'Python {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')"
+    
+    - name: Run DDL Splitting Self-Test
+      run: |
+        python scripts/01_split_db2_ddl.py --selftest
+        echo "DDL splitting test completed successfully"
+    
+    - name: Run Snowflake Conversion Self-Test
+      run: |
+        python scripts/02_convert_to_snowflake.py --selftest
+        echo "Snowflake conversion test completed successfully"
+    
+    - name: Run Complete Test Suite
+      run: |
+        python test_conversion.py
+        echo "Complete test suite passed"
+    
+    - name: Check Output Files
+      run: |
+        echo "Checking generated files..."
+        ls -la data/output/
+        ls -la data/output/original_db2_table_creation/
+        ls -la data/output/new_snowflake_table_creation/
+        
+        # Verify manifest file exists and is valid JSON
+        if [ -f "data/output/manifest.json" ]; then
+          echo "Manifest file exists"
+          python -c "import json; json.load(open('data/output/manifest.json')); print('Manifest is valid JSON')"
+        else
+          echo "ERROR: Manifest file not found"
+          exit 1
+        fi
+        
+        # Verify issues file exists
+        if [ -f "data/output/issues.txt" ]; then
+          echo "Issues file exists"
+          echo "Issues found:"
+          cat data/output/issues.txt
+        else
+          echo "ERROR: Issues file not found"
+          exit 1
+        fi
+    
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-${{ matrix.python-version }}
+        path: |
+          data/output/
+          *.log
+        retention-days: 7
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install linting tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 black isort
+    
+    - name: Run flake8
+      run: |
+        flake8 scripts/ test_conversion.py --max-line-length=100 --ignore=E501,W503
+    
+    - name: Check code formatting with black
+      run: |
+        black --check scripts/ test_conversion.py
+    
+    - name: Check import sorting with isort
+      run: |
+        isort --check-only scripts/ test_conversion.py
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install security tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit safety
+    
+    - name: Run bandit security scan
+      run: |
+        bandit -r scripts/ test_conversion.py -f json -o bandit-report.json || true
+        bandit -r scripts/ test_conversion.py
+    
+    - name: Run safety check
+      run: |
+        safety check --json --output safety-report.json || true
+        safety check
+    
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+        retention-days: 30

@@ -1,0 +1,2 @@
+# This file ensures the input directory is tracked by git
+# Place your DB2 DDL files (.sql or .txt) in this directory

@@ -1,0 +1,18 @@
+# DB2 to Snowflake Table Converter
+# Python requirements file
+#
+# This project uses only Python standard library modules
+# No external dependencies are required
+#
+# Required Python version: 3.7 or higher
+#
+# Standard library modules used:
+# - argparse (command-line argument parsing)
+# - json (manifest file generation)
+# - logging (progress and error reporting)
+# - re (regular expressions for SQL parsing)
+# - datetime (timestamp generation)
+# - pathlib (cross-platform file path handling)
+
+# No external packages required
+# The tool is designed to work with Python standard library only
