@@ -42,7 +42,7 @@ Thank you for your interest in contributing to this project! This document provi
 
 1. **Clone your fork**:
    ```bash
-   git clone https://github.com/yourusername/db2-to-snowflake-converter.git
+   git clone https://github.com/JoshKCIT/db2-to-snowflake-converter.git
    cd db2-to-snowflake-converter
    ```
 

@@ -45,7 +45,7 @@ db2-to-snowflake-converter/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/db2-to-snowflake-converter.git
+   git clone https://github.com/JoshKCIT/db2-to-snowflake-converter.git
    cd db2-to-snowflake-converter
    ```
 
